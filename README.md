@@ -20,7 +20,7 @@ Giriş: I2C yapı pointer'ı, veri saklama yapısı.
 3. MPU6050_Read_Gyro(I2C_HandleTypeDef *I2Cx, MPU6050_t *DataStruct)
 4. 5. MPU6050_Read_All(I2C_HandleTypeDef *I2Cx, MPU6050_t *DataStruct)
 
-Tüm sensör verilerini (ivmeölçer, gyroskop ve sıcaklık) bir kerede okur ve işlenmiş değerlere dönüştürür.
+Tüm sensör verilerini (ivmeölçer, gyroskop) bir kerede okur ve işlenmiş değerlere dönüştürür.
 
 Giriş: I2C yapı pointer'ı, veri saklama yapısı.
 
