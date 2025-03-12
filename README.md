@@ -1,69 +1,45 @@
-# MPU6050
-MPU6050, MEMS teknolojisini kullanan bir sensördür ve ivmeölçer (accelerometer), gyroskop (gyroscope)sensörünü bir arada barındırır. Bu proje, STM32 mikrodenetleyicisi kullanarak MPU6050 sensöründen veri okumayı ve filtrelemeyi sağlar. Projede temel olarak I2C haberleşme protokolü kullanılmıştır.
+MPU6050 Kullanımı
 
-1. MPU6050_Init(I2C_HandleTypeDef *I2Cx)
+Bu proje, MPU6050 IMU (Inertial Measurement Unit) sensörünü STM32 mikrodenetleyicisi ile kullanarak ivmeölçer, jiroskop ve sıcaklık verilerini okumayı sağlar.
 
-MPU6050 sensörünü başlatır ve gerekli register ayarlarını yapar.
+Özellikler
 
-Giriş: I2C haberleşme yapısını işaret eden bir pointer.
+MPU6050 sensörü ile iletişim: I2C haberleşmesi ile veri okuma
 
-Çıkış: Sensör başlatma durumu (0: Başarılı, 1: Başarısız).
+İvmeölçer ve Jiroskop verilerini işleme
 
-2. MPU6050_Read_Accel(I2C_HandleTypeDef *I2Cx, MPU6050_t *DataStruct)
+Sıcaklık sensörü kullanımı
 
-İvmeölçerden (accelerometer) x, y ve z eksenindeki ham ve işlenmiş verileri okur.
-
-Giriş: I2C yapı pointer'ı, veri saklama yapısı.
-
-Çıkış: İşlenmiş ivme değerleri.
-
-3. MPU6050_Read_Gyro(I2C_HandleTypeDef *I2Cx, MPU6050_t *DataStruct)
-4. 5. MPU6050_Read_All(I2C_HandleTypeDef *I2Cx, MPU6050_t *DataStruct)
-
-Tüm sensör verilerini (ivmeölçer, gyroskop) bir kerede okur ve işlenmiş değerlere dönüştürür.
-
-Giriş: I2C yapı pointer'ı, veri saklama yapısı.
-
-Çıkış: Tüm sensör verileri.
-
-6. Kalman_getAngle(Kalman_t *Kalman, double newAngle, double newRate, double dt)
-
-Kalman filtresi kullanarak açıyı hesaplar.
-
-Giriş: Kalman filtre yapısı, yeni açı, yeni hız ve zaman farkı (dt).
-
-Çıkış: Filtrelenmiş açı değeri.
-
-Kullanım Adımları
-
-Bağlantı: MPU6050'nin I2C pinlerini STM32 mikrodenetleyicisine bağlayın.
-
-Başlatma: MPU6050_Init() fonksiyonunu çağırarak sensörü başlatın.
-
-Veri Okuma: Gerekli fonksiyonları kullanarak sensör verilerini okuyun ve işleyin.
-
-Kalman Filtresi: Verileri filtrelemek için Kalman fonksiyonunu entegre edin.
+Kalman filtresi ile açısal verileri hesaplama
 
 Gereksinimler
 
-STM32 mikrodenetleyicisi
+STM32 Mikrodenetleyici
 
-I2C Haberleşme protokolü
+MPU6050 Sensörü
 
-MPU6050 sensör modülü
+HAL Kütüphanesi (STM32CubeMX ile oluşturulmuş projelerde kullanılır)
 
-STM32CubeIDE veya uygun bir geliştirme ortamı
+Dosya Açıklamaları
 
-Ek Notlar
+mpu6050.h
 
-MPU6050'yi beslemek için 3.3V kullanılması önerilir.
+MPU6050_t ve Kalman_t yapılarını tanımlar.
 
-Sensörden okunan ham veriler, uygun ölçeklendirme ve dönüştürme işlemleriyle SI birimlerine çevrilmelidir.
+MPU6050 sensöründen veri okumak için kullanılan fonksiyon prototiplerini içerir.
 
-Daha kararlı sonuçlar için Kalman filtresi veya başka bir filtreleme yöntemi uygulanabilir.
+Kalman filtresi ile açısal hesaplamalar için fonksiyonları içerir.
 
-Gyroskoptan x, y ve z eksenindeki ham ve işlenmiş verileri okur.
+mpu6050.c
 
-Giriş: I2C yapı pointer'ı, veri saklama yapısı.
+MPU6050'nin başlatılması ve veri okunmasını sağlar.
 
-Çıkış: İşlenmiş gyroskop değerleri.
+MPU6050_Init(): Sensörü başlatır ve gerekli ayarlamaları yapar.
+
+MPU6050_Read_Accel(): İvmeölçer verilerini okur.
+
+MPU6050_Read_Gyro(): Jiroskop verilerini okur.
+
+MPU6050_Read_Temp(): Sıcaklık verisini okur.
+
+MPU6050_Read_All(): Tüm sensör verilerini okur ve Kalman filtresi uygular.
